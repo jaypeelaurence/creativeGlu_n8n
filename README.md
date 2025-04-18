@@ -28,7 +28,8 @@
 
   - Review Workflow
 
-    Time based workflow that runs everyday at 8am. it compiles the emails from yesterday to the database. and selects the top 5 emails based from criterias.
+    Time based workflow that runs everyday at 8am. it compiles the emails from yesterday to the database. 
+    AI Agent selects and summarize the top 5 emails based from criterias.
     Sends email and slack notification for summary.
     
 

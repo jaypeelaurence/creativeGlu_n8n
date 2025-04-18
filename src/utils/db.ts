@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb';
 
-const uri = 'mongodb+srv://leapifyAdmin:YYLnJOpwpxuuLupj@leapify-dev.y7twds4.mongodb.net/';
+const uri = process.env.DB_URL as string;
 const options = {};
 
 const  clientPromise = new MongoClient(uri, options).connect();

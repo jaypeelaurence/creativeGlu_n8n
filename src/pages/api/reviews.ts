@@ -9,22 +9,19 @@ export default async function handler(req: Record<string, never>, res: Record<st
     const now = new Date();
 
     const startOfYesterday = new Date(now);
-    startOfYesterday.setDate(now.getDate() - 1);
     startOfYesterday.setHours(0, 0, 0, 0);
     
     const endOfYesterday = new Date(now);
-    endOfYesterday.setDate(now.getDate() - 1);
+    endOfYesterday.setHours(23, 59, 59, 999);
 
-    const reviews = await db.collection('reviews').find(
-      {
-        // createdAt: {
-        //   "$gte": `${startOfYesterday.toISOString()}`,
-        //   "$lte": `${endOfYesterday.toISOString()}`,
-        // }
+    const reviews = await db.collection('reviews').find({
+      "createdAt": {
+        "$gte": `${startOfYesterday.toISOString()}`,
+        "$lte": `${endOfYesterday.toISOString()}`,
       }
-    ).toArray();
+    }).sort({ createdAt: -1 }).toArray();
 
-    res?.status(200).json(reviews);
+    res?.status(200).json([reviews[0]]);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });

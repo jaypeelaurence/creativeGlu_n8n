@@ -14,6 +14,8 @@ const Home = () => {
 
   const date = useMemo(() => new Date().toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }), []);
 
+  console.log(reviews.length)
+
   return (
     <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
       <div className="bg-[#1e2a45] text-white text-center py-6 px-4">
@@ -24,13 +26,13 @@ const Home = () => {
         <p className="text-gray-700 text-base mb-6">
           Here’s your daily email summary to help you start the day informed and organized:
         </p>
-        {reviews.map((review: Record<string, never>, index) => (
+        {reviews.length && reviews?.map((review: Record<string, never>, index) => (
           <div key={index} className="mb-6 border border-gray-200 rounded-lg p-4 shadow-sm">
-            <h2 className="text-xls font-semibold text-[#1e2a45] mb-2">📬 {review.title}</h2>
+            <h2 className="text-xls font-semibold text-[#1e2a45] mb-2">📬 {review?.title}</h2>
             <ul className="list-disc list-inside text-gray-800 text-sm space-y-5">
               <li className="list-none text-md">
                 <strong>📝 Summary:</strong> 
-                <p>{review.summary}</p>
+                <p>{review?.summary}</p>
               </li>
             </ul>
           </div>
